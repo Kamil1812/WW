@@ -13,13 +13,13 @@
         android:layout_height="wrap_content"
         android:text="Wynik:"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintHorizontal_bias="0.789"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn"
-        app:layout_constraintVertical_bias="0.729" />
+        app:layout_constraintVertical_bias="0.73" />
 
     <TextView
         android:id="@+id/BF_wynik3"
@@ -27,13 +27,13 @@
         android:layout_height="wrap_content"
         android:text="Wynik:"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintHorizontal_bias="0.789"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn"
-        app:layout_constraintVertical_bias="0.562" />
+        app:layout_constraintVertical_bias="0.56" />
 
     <TextView
         android:id="@+id/elementy_textView"
@@ -72,9 +72,11 @@
         app:layout_constraintTop_toBottomOf="@+id/elementy_textView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Wpisz tu:"
+            android:inputType="number"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -88,9 +90,11 @@
         app:layout_constraintTop_toBottomOf="@+id/iteracja_textView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EditText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Wpisz tu:"
+            android:inputType="number"
             android:textColor="@color/black"
             android:textColorHint="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -129,13 +133,13 @@
         android:layout_height="wrap_content"
         android:text="Wynik:"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintHorizontal_bias="0.789"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn"
-        app:layout_constraintVertical_bias="0.241" />
+        app:layout_constraintVertical_bias="0.245" />
 
     <TextView
         android:id="@+id/BF_wynik2"
@@ -143,13 +147,13 @@
         android:layout_height="wrap_content"
         android:text="Wynik:"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintHorizontal_bias="0.789"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn"
-        app:layout_constraintVertical_bias="0.403" />
+        app:layout_constraintVertical_bias="0.406" />
 
     <TextView
         android:id="@+id/BF_czas"
@@ -263,5 +267,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn"
         app:layout_constraintVertical_bias="0.729" />
+
+    <TextView
+        android:id="@+id/textView_lancuch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Łańcuch:"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/wyniki_textView"
+        app:layout_constraintEnd_toStartOf="@+id/btn"
+        app:layout_constraintHorizontal_bias="0.385"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintVertical_bias="0.341" />
+
+    <TextView
+        android:id="@+id/textView_wzorzec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wzorzec:"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/wyniki_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.876"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintVertical_bias="0.341" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
