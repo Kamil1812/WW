@@ -19,12 +19,9 @@ class MainActivity : AppCompatActivity() {
             var text2 = findViewById<EditText>(R.id.EditText2)
 
             if (!text.text.isEmpty() && !text2.text.isEmpty()) {
-                var ilosc_elementow = findViewById<EditText>(R.id.EditText1).text.toString().toInt()
-                var ile_razy = findViewById<EditText>(R.id.EditText2).text.toString().toInt()
-
-
 
                 // Generowanie łańcucha
+                var ilosc_elementow = findViewById<EditText>(R.id.EditText1).text.toString().toInt()
                 var losowa = java.util.Random()
                 var stringBuilder = StringBuilder()
                 for (i in 1..ilosc_elementow) {
@@ -33,17 +30,9 @@ class MainActivity : AppCompatActivity() {
                 var lancuch = stringBuilder.toString()
                 findViewById<TextView>(R.id.textView_lancuch).text = lancuch
 
-
-
                 // Wzorzec
-                var losowa2 = java.util.Random()
-                var stringBuilder2 = StringBuilder()
-                for (i in 1..1) {
-                    stringBuilder2.append(losowa2.nextInt(10))
-                }
-                var wzorzec = stringBuilder2.toString()
-                findViewById<TextView>(R.id.textView_wzorzec).text = wzorzec
-
+                var wzor = findViewById<EditText>(R.id.EditText2).text.toString()
+                findViewById<TextView>(R.id.textView_wzorzec).text = wzor
 
 
                 // Algorytm: Brute Force
@@ -65,12 +54,11 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 var BF_wynik_textView = findViewById<TextView>(R.id.BF_wynik)
-
-                val wynikBF = BF(lancuch, wzorzec)
+                val wynikBF = BF(lancuch, wzor)
 
                 if (wynikBF.first != null)
                 {
-                    BF_wynik_textView.text = "Wzorzec na pozycji ${wynikBF.first}"
+                    BF_wynik_textView.text = "Wzorzec występuję w łańcuchu"
                 }
 
                 else
@@ -80,84 +68,52 @@ class MainActivity : AppCompatActivity() {
 
                 // Algorytm: KMP
 
-                fun NPS(pattern: String): IntArray {
-                    val nps = IntArray(pattern.length)
-                    var len = 0
-                    var i = 1
 
-                    while (i < pattern.length) {
-                        if (pattern[i] == pattern[len])
-                        {
-                            len++
-                            nps[i] = len
-                            i++
-                        }
-                        else
-                        {
-                            if (len != 0)
-                            {
-                                len = nps[len - 1]
-                            }
-
-                            else
-                            {
-                                nps[i] = 0
-                                i++
-                            }
-                        }
-                    }
-                    return nps
-                }
-
-                fun KMP(tekst: String, wzor: String): Int {
-                    val nps = NPS(wzor)
-                    var i = 0 // indeks w tekście
-                    var j = 0 // indeks w wzorcu
-
-                    while (i < tekst.length) {
-                        if (tekst[i] == wzor[j])
-                        {
-                            i++
-                            j++
-                        }
-
-                        if (j == tekst.length)
-                        {
-                            return i - j
-                        }
-
-                        else if (i < tekst.length && tekst[i] != wzor[j])
-                        {
-                            if (j != 0)
-                            {
-                                j = nps[j - 1]
-                            }
-
-                            else
-                            {
-                                i++
-                            }
-                        }
-                    }
-                    return -1 // Nie znaleziono wzorca
-                }
-
-                val pozycja = KMP(lancuch, wzorzec)
-                var KMP_wynik_textView = findViewById<TextView>(R.id.KMP_wynik)
-
-                if (pozycja == -1)
-                {
-                    KMP_wynik_textView.text = "Nie znaleziono wzorca"
-                }
-
-                else if (pozycja != -1)
-                {
-                    KMP_wynik_textView.text = "Wzorzec na pozycji $pozycja"
-                }
 
                 // Algorytm BM:
 
+                fun BM(tekst: String, wzor: String): Int {
+                    val x = tekst.length
+                    val y = wzor.length
+                    if (y > x) return -1
 
+                    val tab_przesuniec = IntArray(256) { y }
+                    for (i in 0 until y - 1)
+                    {
+                        tab_przesuniec[wzor[i].toInt()] = y - 1 - i
+                    }
+
+                    var i = y - 1
+                    var j = y - 1
+                    while (i < x) {
+                        if (tekst[i] == wzor[j])
+                        {
+                            if (j == 0) return i
+                            i--
+                            j--
+                        }
+                        else
+                        {
+                            i += maxOf(tab_przesuniec[tekst[i].toInt()], y - j)
+                            j = y - 1
+                        }
+                    }
+
+                    return -1
+                }
+
+                var BM_wynik_textView = findViewById<TextView>(R.id.BM_wynik)
+                val wynikBM = BM(lancuch, wzor)
+
+                if (wynikBM != -1)
+                {
+                    BM_wynik_textView.text = "Wzorzec występuję w łańcuchu"
+                }
+
+                else if (wynikBM == -1)
+                {
+                    BM_wynik_textView.text = "Nie znaleziono wzorca"
+                }
 
                 // Algorytm RK:
             }
