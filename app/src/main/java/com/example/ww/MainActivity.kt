@@ -20,18 +20,41 @@ class MainActivity : AppCompatActivity() {
 
             if (!text.text.isEmpty() && !text2.text.isEmpty()) {
 
-                // Generowanie łańcucha
                 var ilosc_elementow = findViewById<EditText>(R.id.EditText1).text.toString().toInt()
+                var wzor = findViewById<EditText>(R.id.EditText2).text.toString()
+
+                val dlugosc_wzoru = wzor.length
+
+                if (dlugosc_wzoru > ilosc_elementow)
+                {
+                    findViewById<TextView>(R.id.textView_error).text = "Wzorzec nie może być dłuższy od łańcucha!"
+
+                    findViewById<TextView>(R.id.textView_lancuch).text = "Łańcuch:"
+                    findViewById<TextView>(R.id.textView_wzorzec).text = "Wzorzec:"
+
+                    findViewById<TextView>(R.id.BF_wynik).text = "Wynik:"
+                    findViewById<TextView>(R.id.KMP_wynik).text = "Wynik:"
+                    findViewById<TextView>(R.id.BM_wynik).text = "Wynik:"
+                    findViewById<TextView>(R.id.RK_wynik).text = "Wynik:"
+                }
+
+                else if (dlugosc_wzoru <= ilosc_elementow)
+                {
+
+                findViewById<TextView>(R.id.textView_error).text = ""
+
+                // Generowanie łańcucha
                 var losowa = java.util.Random()
                 var stringBuilder = StringBuilder()
-                for (i in 1..ilosc_elementow) {
+                for (i in 1..ilosc_elementow)
+                {
                     stringBuilder.append(losowa.nextInt(10))
                 }
+
                 var lancuch = stringBuilder.toString()
                 findViewById<TextView>(R.id.textView_lancuch).text = lancuch
 
                 // Wzorzec
-                var wzor = findViewById<EditText>(R.id.EditText2).text.toString()
                 findViewById<TextView>(R.id.textView_wzorzec).text = wzor
 
 
@@ -237,6 +260,20 @@ class MainActivity : AppCompatActivity() {
                 {
                     RK_wynik_textView.text = "Nie znaleziono wzorca"
                 }
+            }
+            }
+
+            else
+            {
+                findViewById<TextView>(R.id.textView_error).text = "Podaj dane!"
+
+                findViewById<TextView>(R.id.textView_lancuch).text = "Łańcuch:"
+                findViewById<TextView>(R.id.textView_wzorzec).text = "Wzorzec:"
+
+                findViewById<TextView>(R.id.BF_wynik).text = "Wynik:"
+                findViewById<TextView>(R.id.KMP_wynik).text = "Wynik:"
+                findViewById<TextView>(R.id.BM_wynik).text = "Wynik:"
+                findViewById<TextView>(R.id.RK_wynik).text = "Wynik:"
             }
         }
     }
