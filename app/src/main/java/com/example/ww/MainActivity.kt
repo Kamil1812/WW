@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
+import kotlin.system.measureTimeMillis
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,22 +42,6 @@ class MainActivity : AppCompatActivity() {
                 else if (dlugosc_wzoru <= ilosc_elementow)
                 {
 
-                if (ilosc_elementow > 15)
-                {
-                    findViewById<TextView>(R.id.textView_error).text = "Łańcuch może mieć maksymalnie 15 znaków!"
-
-                    findViewById<TextView>(R.id.textView_lancuch).text = "Łańcuch:"
-                    findViewById<TextView>(R.id.textView_wzorzec).text = "Wzorzec:"
-
-                    findViewById<TextView>(R.id.BF_wynik).text = "Wynik:"
-                    findViewById<TextView>(R.id.KMP_wynik).text = "Wynik:"
-                    findViewById<TextView>(R.id.BM_wynik).text = "Wynik:"
-                    findViewById<TextView>(R.id.RK_wynik).text = "Wynik:"
-                }
-
-                else if (ilosc_elementow <= 15)
-                {
-
                 findViewById<TextView>(R.id.textView_error).text = ""
 
                 // Generowanie łańcucha
@@ -68,10 +53,16 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 var lancuch = stringBuilder.toString()
-                findViewById<TextView>(R.id.textView_lancuch).text = lancuch
+                //findViewById<TextView>(R.id.textView_lancuch).text = lancuch
 
                 // Wzorzec
                 findViewById<TextView>(R.id.textView_wzorzec).text = wzor
+
+                // Czas
+                val BF_czas = findViewById<TextView>(R.id.BF_czas)
+                val KMP_czas = findViewById<TextView>(R.id.KMP_czas)
+                val BM_czas = findViewById<TextView>(R.id.BM_czas)
+                val RK_czas = findViewById<TextView>(R.id.RK_czas)
 
 
                 // Algorytm: Brute Force
@@ -105,13 +96,17 @@ class MainActivity : AppCompatActivity() {
                     BF_wynik_textView.text = "Nie znaleziono wzorca"
                 }
 
+                var czas  = measureTimeMillis{
+                    BF(lancuch, wzor)
+                }
+                BF_czas.text = String.format("%s ms", czas)
+
                 // Algorytm: KMP
 
                 fun KMP(tekst: String, wzor: String): Int {
                     val x = tekst.length
                     val y = wzor.length
 
-                    // obliczenie tablicy prefiksowej
                     val nps = Array(y) { 0 }
                     var dlugosc = 0
                     var i = 1
@@ -179,6 +174,11 @@ class MainActivity : AppCompatActivity() {
                     KMP_wynik_textView.text = "Nie znaleziono wzorca"
                 }
 
+                czas = measureTimeMillis {
+                    KMP(lancuch, wzor)
+                }
+                KMP_czas.text = String.format("%s ms", czas)
+
                 // Algorytm BM:
 
                 fun BM(tekst: String, wzor: String): Int {
@@ -223,6 +223,11 @@ class MainActivity : AppCompatActivity() {
                 {
                     BM_wynik_textView.text = "Nie znaleziono wzorca"
                 }
+
+                czas = measureTimeMillis {
+                    BM(lancuch, wzor)
+                }
+                BM_czas.text = String.format("%s ms", czas)
 
                 // Algorytm RK:
 
@@ -276,6 +281,11 @@ class MainActivity : AppCompatActivity() {
                 {
                     RK_wynik_textView.text = "Nie znaleziono wzorca"
                 }
+
+                czas = measureTimeMillis {
+                    RK(lancuch, wzor)
+                }
+                RK_czas.text = String.format("%s ms", czas)
             }
             }
 
@@ -293,5 +303,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-}
 }
