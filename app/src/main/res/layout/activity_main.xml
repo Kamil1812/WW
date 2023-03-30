@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/BF_wynik4"
+        android:id="@+id/RK_wynik"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Wynik:"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.73" />
 
     <TextView
-        android:id="@+id/BF_wynik3"
+        android:id="@+id/BM_wynik"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Wynik:"
@@ -142,7 +142,7 @@
         app:layout_constraintVertical_bias="0.245" />
 
     <TextView
-        android:id="@+id/BF_wynik2"
+        android:id="@+id/KMP_wynik"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Wynik:"

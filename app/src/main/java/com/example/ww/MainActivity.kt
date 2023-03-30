@@ -12,15 +12,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Algorytm: KMP
-
-
-        // Algorytm: BM
-
-
-        // Algorytm: RK
-
-
         // Button
         findViewById<Button>(R.id.btn).setOnClickListener {
 
@@ -76,14 +67,99 @@ class MainActivity : AppCompatActivity() {
                 var BF_wynik_textView = findViewById<TextView>(R.id.BF_wynik)
 
                 val wynikBF = BF(lancuch, wzorzec)
+
                 if (wynikBF.first != null)
                 {
-                    BF_wynik_textView.text = "Znaleziono wzorzec na pozycji ${wynikBF.first}"
+                    BF_wynik_textView.text = "Wzorzec na pozycji ${wynikBF.first}"
                 }
+
                 else
                 {
                     BF_wynik_textView.text = "Nie znaleziono wzorca"
                 }
+
+                // Algorytm: KMP
+
+                fun NPS(pattern: String): IntArray {
+                    val nps = IntArray(pattern.length)
+                    var len = 0
+                    var i = 1
+
+                    while (i < pattern.length) {
+                        if (pattern[i] == pattern[len])
+                        {
+                            len++
+                            nps[i] = len
+                            i++
+                        }
+                        else
+                        {
+                            if (len != 0)
+                            {
+                                len = nps[len - 1]
+                            }
+
+                            else
+                            {
+                                nps[i] = 0
+                                i++
+                            }
+                        }
+                    }
+                    return nps
+                }
+
+                fun KMP(tekst: String, wzor: String): Int {
+                    val nps = NPS(wzor)
+                    var i = 0 // indeks w tekście
+                    var j = 0 // indeks w wzorcu
+
+                    while (i < tekst.length) {
+                        if (tekst[i] == wzor[j])
+                        {
+                            i++
+                            j++
+                        }
+
+                        if (j == tekst.length)
+                        {
+                            return i - j
+                        }
+
+                        else if (i < tekst.length && tekst[i] != wzor[j])
+                        {
+                            if (j != 0)
+                            {
+                                j = nps[j - 1]
+                            }
+
+                            else
+                            {
+                                i++
+                            }
+                        }
+                    }
+                    return -1 // Nie znaleziono wzorca
+                }
+
+                val pozycja = KMP(lancuch, wzorzec)
+                var KMP_wynik_textView = findViewById<TextView>(R.id.KMP_wynik)
+
+                if (pozycja == -1)
+                {
+                    KMP_wynik_textView.text = "Nie znaleziono wzorca"
+                }
+
+                else if (pozycja != -1)
+                {
+                    KMP_wynik_textView.text = "Wzorzec na pozycji $pozycja"
+                }
+
+                // Algorytm BM:
+
+
+
+                // Algorytm RK:
             }
         }
     }
