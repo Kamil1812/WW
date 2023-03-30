@@ -68,7 +68,77 @@ class MainActivity : AppCompatActivity() {
 
                 // Algorytm: KMP
 
+                fun KMP(tekst: String, wzor: String): Int {
+                    val x = tekst.length
+                    val y = wzor.length
 
+                    // obliczenie tablicy prefiksowej
+                    val nps = Array(y) { 0 }
+                    var len = 0
+                    var i = 1
+                    while (i < y) {
+                        if (wzor[i] == wzor[len])
+                        {
+                            len++
+                            nps[i] = len
+                            i++
+                        }
+                        else
+                        {
+                            if (len != 0)
+                            {
+                                len = nps[len - 1]
+                            }
+                            else
+                            {
+                                nps[i] = 0
+                                i++
+                            }
+                        }
+                    }
+
+                    var j = 0
+                    var i_s = 0
+                    while (i_s < x)
+                    {
+                        if (wzor[j] == tekst[i_s])
+                        {
+                            j++
+                            i_s++
+                        }
+
+                        if (j == y)
+                        {
+                            return i_s - j
+                        }
+                        else if (i_s < x && wzor[j] != tekst[i_s])
+                        {
+                            if (j != 0)
+                            {
+                                j = nps[j - 1]
+                            }
+                            else
+                            {
+                                i_s++
+                            }
+                        }
+                    }
+
+                    return -1
+                }
+
+                var KMP_wynik_textView = findViewById<TextView>(R.id.KMP_wynik)
+                val wynikKMP = KMP(lancuch, wzor)
+
+                if (wynikKMP != -1)
+                {
+                    KMP_wynik_textView.text = "Wzorzec występuję w łańcuchu"
+                }
+
+                else if (wynikKMP == -1)
+                {
+                    KMP_wynik_textView.text = "Nie znaleziono wzorca"
+                }
 
                 // Algorytm BM:
 
