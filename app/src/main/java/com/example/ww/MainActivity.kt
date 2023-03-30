@@ -41,6 +41,22 @@ class MainActivity : AppCompatActivity() {
                 else if (dlugosc_wzoru <= ilosc_elementow)
                 {
 
+                if (ilosc_elementow > 15)
+                {
+                    findViewById<TextView>(R.id.textView_error).text = "Łańcuch może mieć maksymalnie 15 znaków!"
+
+                    findViewById<TextView>(R.id.textView_lancuch).text = "Łańcuch:"
+                    findViewById<TextView>(R.id.textView_wzorzec).text = "Wzorzec:"
+
+                    findViewById<TextView>(R.id.BF_wynik).text = "Wynik:"
+                    findViewById<TextView>(R.id.KMP_wynik).text = "Wynik:"
+                    findViewById<TextView>(R.id.BM_wynik).text = "Wynik:"
+                    findViewById<TextView>(R.id.RK_wynik).text = "Wynik:"
+                }
+
+                else if (ilosc_elementow <= 15)
+                {
+
                 findViewById<TextView>(R.id.textView_error).text = ""
 
                 // Generowanie łańcucha
@@ -97,20 +113,20 @@ class MainActivity : AppCompatActivity() {
 
                     // obliczenie tablicy prefiksowej
                     val nps = Array(y) { 0 }
-                    var len = 0
+                    var dlugosc = 0
                     var i = 1
                     while (i < y) {
-                        if (wzor[i] == wzor[len])
+                        if (wzor[i] == wzor[dlugosc])
                         {
-                            len++
-                            nps[i] = len
+                            dlugosc++
+                            nps[i] = dlugosc
                             i++
                         }
                         else
                         {
-                            if (len != 0)
+                            if (dlugosc != 0)
                             {
-                                len = nps[len - 1]
+                                dlugosc = nps[dlugosc - 1]
                             }
                             else
                             {
@@ -277,4 +293,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+}
 }
