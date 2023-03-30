@@ -57,8 +57,6 @@ class MainActivity : AppCompatActivity() {
 
                 // Algorytm: Brute Force
                 fun BF(tekst: String, wzor: String): Pair<Int?, Long> {
-                    val start = System.currentTimeMillis()
-
                     val x = tekst.length
                     val y = wzor.length
 
@@ -68,17 +66,14 @@ class MainActivity : AppCompatActivity() {
                             j++
                         }
                         if (j == y) {
-                            val koniec = System.currentTimeMillis()
-                            return Pair(i, koniec - start)
+                            return Pair(i, 0)
                         }
                     }
 
-                    val koniec = System.currentTimeMillis()
-                    return Pair(null, koniec - start)
+                    return Pair(null, 0)
                 }
 
                 var BF_wynik_textView = findViewById<TextView>(R.id.BF_wynik)
-                var BF_czas_textView = findViewById<TextView>(R.id.BF_czas)
 
                 val wynikBF = BF(lancuch, wzorzec)
                 if (wynikBF.first != null)
@@ -89,7 +84,6 @@ class MainActivity : AppCompatActivity() {
                 {
                     BF_wynik_textView.text = "Nie znaleziono wzorca"
                 }
-                BF_czas_textView.text = "Czas: ${wynikBF.second}"
             }
         }
     }
