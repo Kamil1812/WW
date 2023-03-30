@@ -42,8 +42,6 @@ class MainActivity : AppCompatActivity() {
                 else if (dlugosc_wzoru <= ilosc_elementow)
                 {
 
-                findViewById<TextView>(R.id.textView_error).text = ""
-
                 // Generowanie łańcucha
                 var losowa = java.util.Random()
                 var stringBuilder = StringBuilder()
@@ -53,7 +51,15 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 var lancuch = stringBuilder.toString()
-                //findViewById<TextView>(R.id.textView_lancuch).text = lancuch
+                if (ilosc_elementow > 15)
+                {
+                    findViewById<TextView>(R.id.textView_lancuch).text = "Zbyt długi łańcuch"
+                }
+
+                else if (ilosc_elementow <= 15)
+                {
+                    findViewById<TextView>(R.id.textView_lancuch).text = lancuch
+                }
 
                 // Wzorzec
                 findViewById<TextView>(R.id.textView_wzorzec).text = wzor
