@@ -19,14 +19,14 @@ class MainActivity : AppCompatActivity() {
         // Button
         findViewById<Button>(R.id.btn).setOnClickListener {
 
-            val ilosc_elementow = findViewById<EditText>(R.id.EditText1).text.toString().toInt()
+            val ilosc_elementow = findViewById<EditText>(R.id.EditText1).text.toString()
             val wzor = findViewById<EditText>(R.id.EditText2).text.toString()
 
             if (!ilosc_elementow.toString().isEmpty() && !wzor.isEmpty()) {
 
                 val dlugosc_wzoru = wzor.length
 
-                if (dlugosc_wzoru > ilosc_elementow)
+                if (dlugosc_wzoru > ilosc_elementow.toInt())
                 {
                     findViewById<TextView>(R.id.textView_error).text = "Wzorzec nie może być dłuższy od łańcucha!"
 
@@ -39,24 +39,26 @@ class MainActivity : AppCompatActivity() {
                     findViewById<TextView>(R.id.RK_wynik).text = "Wynik:"
                 }
 
-                else if (dlugosc_wzoru <= ilosc_elementow)
+                else if (dlugosc_wzoru <= ilosc_elementow.toInt())
                 {
+
+                    findViewById<TextView>(R.id.textView_error).text = ""
 
                     // Generowanie łańcucha
                     val losowa = java.util.Random()
                     val stringBuilder = StringBuilder()
-                    for (i in 1..ilosc_elementow)
+                    for (i in 1..ilosc_elementow.toInt())
                     {
                         stringBuilder.append(losowa.nextInt(10))
                     }
 
                     val lancuch = stringBuilder.toString()
-                    if (ilosc_elementow > 15)
+                    if (ilosc_elementow.toInt() > 15)
                     {
                         findViewById<TextView>(R.id.textView_lancuch).text = "Zbyt długi łańcuch"
                     }
 
-                    else if (ilosc_elementow <= 15)
+                    else if (ilosc_elementow.toInt() <= 15)
                     {
                         findViewById<TextView>(R.id.textView_lancuch).text = lancuch
                     }
